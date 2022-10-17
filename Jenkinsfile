@@ -35,6 +35,7 @@ pipeline {
         stage('Kubernetes Deploy') {
             steps{
                 echo "deploy" 
+                sh "docker run -itd -p 4114:8000 --name auth yaradata/$IMAGE_TAG_NAME:latest"
             }
         }
     }

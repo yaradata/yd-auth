@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENV APP_PORT=8080
+ENV APP_PORT=8000
 ENV APP_RELOAD=True
 ENV APP_WORKERS=2
 

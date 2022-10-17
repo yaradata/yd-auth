@@ -64,7 +64,7 @@ logging.critical('This is a critical message')
 
 app = FastAPI(
     title="AutoML",
-    description="""**Auto Machine Learning App**""",
+    description="""**Authentification**""",
     version="0.0.1",
     contact={
         "name": "YaraData",
@@ -76,7 +76,7 @@ app = FastAPI(
 # db = SQLAlchemy() 
 
 
-APP_PORT = os.environ.get("APP_PORT", default=8070)
+APP_PORT = os.environ.get("APP_PORT", default=8000)
 APP_RELOAD = os.environ.get("APP_RELOAD", default=True)
 APP_WORKERS = os.environ.get("APP_WORKERS", default=3)
 
