@@ -2,8 +2,8 @@ pipeline {
     agent any 
 
     environment {
-        auth_folder = "${WORKSPACE}/backend/auth"
-        project_folder = "${WORKSPACE}/backend/project"
+        auth_folder = "${WORKSPACE}"
+        IMAGE_TAG_NAME = "authentication"
     }
 
     stages {
@@ -12,7 +12,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la'
                 // build docker image 
-                sh "cd  $auth_folder && docker build -t auth ."
+                sh "docker build -t auth ."
                 // clean docker dangling image
                 script {
                     try {
@@ -27,12 +27,17 @@ pipeline {
         stage('Push image to docker hub') {
             steps {
                 script {
-                    // my-image:${env.BUILD_ID}
-                    sh 'echo "70077007/$IMAGE_TAG_NAME:$BUILD_NUMBER"'
+                    
                     docker.withRegistry('', 'dockerHub-access' ) {
-                        def customImage = docker.build("70077007/$IMAGE_TAG_NAME:$BUILD_NUMBER")
+                        def customImage = docker.build("yaradata/$IMAGE_TAG_NAME:latest")
                         customImage.push()
-                     }
+
+                        // docker push yaradata/authentication:tagname
+
+                        // docker tag local-image:tagname new-repo:tagname
+                        // docker push new-repo:tagname
+                    }
+
                 }
             }
         }
