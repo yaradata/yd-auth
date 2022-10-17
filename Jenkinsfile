@@ -9,6 +9,8 @@ pipeline {
     stages {
         stage('Docker Build') {
             steps{
+                sh 'pwd'
+                sh 'ls -la'
                 // build docker image 
                 sh "cd  $auth_folder && docker build -t auth ."
                 // clean docker dangling image
