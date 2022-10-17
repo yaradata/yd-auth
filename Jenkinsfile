@@ -9,18 +9,8 @@ pipeline {
     stages {
         stage('Docker Build') {
             steps{
-                sh 'pwd'
-                sh 'ls -la'
                 // build docker image 
                 sh "docker build -t auth ."
-                // clean docker dangling image
-                script {
-                    try {
-                        sh "docker rmi \$(docker images -f 'dangling=true' -q)"
-                    } catch (Exception e) {
-                        echo 'Exception occurred: ' + e.toString() 
-                    } 
-                } 
             }
         } 
 
