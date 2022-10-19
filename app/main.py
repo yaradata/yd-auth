@@ -1,17 +1,16 @@
-from fastapi import FastAPI, Depends
-
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+
+
+from databases.database import init_database
+from services import auth
 
 app = FastAPI()
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl = 'token')
-
-@app.post('/token', tags=['token'])
-async def token(form: OAuth2PasswordRequestForm = Depends()):
-    return {'access_token': form.username + 'token'}
-
 @app.get('/')
-async def home(token: str = Depends(oauth2_scheme)):
+async def home():
     return RedirectResponse('/docs')
 
+
+init_database(app)
+app.include_router(auth.auth_router, tags = ['auth'])
