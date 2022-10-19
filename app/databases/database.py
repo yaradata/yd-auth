@@ -19,7 +19,7 @@ elif os.environ.get("ENVIRONMENT") == "PROD":
     DB_PORT = os.environ.get("DB_PORT")
 
 else:
-    raise "error to connect to database"
+    raise "error while connecting to database"
 
 register_tortoise(
     app,
