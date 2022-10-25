@@ -10,11 +10,11 @@ COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY .. .
 
 ENV APP_PORT=8000
 ENV APP_RELOAD=True
 ENV APP_WORKERS=2
 
 
-CMD ["python3", "./main.py"]
+CMD ["python3", "../app/main.py"]
